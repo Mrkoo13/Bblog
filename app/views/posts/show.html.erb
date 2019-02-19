@@ -1,0 +1,34 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.body %></p>
+<hr>
+<%= link_to "Redact", edit_post_path(@post), :class => 'btn btn-warning' %>
+<%= link_to "DESTROY", post_path(@post), method: :delete, data:{confirm:" do you want to destroy post?"}, :class => 'btn btn-danger' %>
+<hr>
+<h2> All of our posts </h2>
+<% @post.comments.each do |comment| %>
+ <div class="alert alert-light">
+<p><strong><%= comment.username %></strong>: <%= comment.body %></p>
+</div>
+
+
+<% end %>
+<hr>
+<h2> ADD Comments</h2>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+
+<p>
+  User name<br>
+   <%= f.text_field(:username, {:class => 'form-control'}) %>
+
+</p>
+
+<p>
+  Comment text<br>
+   <%= f.text_area(:body, {:class => 'form-control'}) %>
+</p>
+
+<p>
+   <%= f.submit("add comment",{:class => 'btn btn-warning'})%>
+</p>
+
+<% end %>
