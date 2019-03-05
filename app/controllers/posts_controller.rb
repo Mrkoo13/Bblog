@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_action :load_post , only: [:show, :edit, :update, :destroy]
+
   def index
      @post = Post.all
   end
@@ -9,45 +11,44 @@ class PostsController < ApplicationController
   end
 
   def show
-      @post = Post.find(params[:id])
+    @comment = @post.comments.build
   end
 
   def edit
-      @post = Post.find(params[:id])
+
   end
 
   def update
-    @post = Post.find(params[:id])
-
     if (@post.update(post_params))
      redirect_to @post
     else
-    render 'edit'
+     render 'edit'
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
-
     @post.destroy
     redirect_to posts_path
-
   end
 
   def create
     @post = Post.new(post_params)
 
-    if (@post.save)
-    redirect_to @post
+    if @post.save
+     redirect_to @post
     else
-    render 'new'
+     render 'new'
     end
   end
 
+  private
 
+  def load_post
+    @post = Post.find(params[:id])
+  end
 
-  private def post_params
-    params.require(:post).permit(:title, :body )
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end
 

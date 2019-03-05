@@ -5,22 +5,15 @@
      <div class="alert alert-danger"><%= msg %></div>
    <% end %>
     <% end %>
-
-
 <p>
-
   name<br>
    <%= f.text_field(:title, {:class => 'form-control'}) %>
-
 </p>
-
 <p>
   Post text<br>
    <%= f.text_area(:body, {:class => 'form-control'}) %>
 </p>
-
 <p>
    <%= f.submit({:class => 'btn btn-succes'}) %>
 </p>
-
 <% end %>

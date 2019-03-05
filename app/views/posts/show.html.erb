@@ -9,26 +9,20 @@
  <div class="alert alert-light">
 <p><strong><%= comment.username %></strong>: <%= comment.body %></p>
 </div>
-
-
 <% end %>
 <hr>
 <h2> ADD Comments</h2>
-<%= form_for([@post, @post.comments.build]) do |f| %>
-
+<%= form_for(@comment, url: post_comments_path(@post), method: :post) do |f| %>
 <p>
   User name<br>
    <%= f.text_field(:username, {:class => 'form-control'}) %>
-
 </p>
-
 <p>
   Comment text<br>
    <%= f.text_area(:body, {:class => 'form-control'}) %>
 </p>
-
 <p>
    <%= f.submit("add comment",{:class => 'btn btn-warning'})%>
 </p>
-
+<%binding.pry %>
 <% end %>
